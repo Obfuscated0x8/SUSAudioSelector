@@ -37,11 +37,12 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: |
         msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:TargetFramework=net8.0-windows ${{env.SOLUTION_FILE_PATH}}
+        ls -l
+        pwd
         
-
     - name: release
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          ${{env.GITHUB_WORKSPACE}}\bin\${{env.BUILD_CONFIGURATION}}\release-${{ github.ref }}.zip
+          ${{env.GITHUB_WORKSPACE}}/bin/${{env.BUILD_CONFIGURATION}}/release-${{ github.ref }}.zip
   
