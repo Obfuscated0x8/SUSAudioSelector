@@ -1,5 +1,5 @@
-![Build](https://github.com/Obfuscated0x8/SUSAudioSelector/workflows/MSBuild/badge.svg)
-![Release](https://github.com/Obfuscated0x8/SUSAudioSelector/workflows/Release/badge.svg)
+[![MSBuild](https://github.com/Obfuscated0x8/SUSAudioSelector/actions/workflows/msbuild.yml/badge.svg)](https://github.com/Obfuscated0x8/SUSAudioSelector/actions/workflows/msbuild.yml)
+[![Release](https://github.com/Obfuscated0x8/SUSAudioSelector/actions/workflows/release.yml/badge.svg)](https://github.com/Obfuscated0x8/SUSAudioSelector/actions/workflows/release.yml)
 
 # SUSAudioSelector
 
