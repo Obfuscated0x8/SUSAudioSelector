@@ -37,10 +37,8 @@ jobs:
       run: |
         echo "[DEBUG] Test pulling out tag name and cutting to be using in zip name"
         $CUT_TAG = echo "${{ github.ref }}.split('/')[2]"
-        echo "::debug:: CUT_TAG=$CUT_TAG"
         echo "TAG_NAME=$CUT_TAG" >> "$GITHUB_ENV"
-        echo "[DEBUG] Test tag name in env var"
-        echo "[DEBUG] env.TAG_NAME: ${{ env.TAG_NAME }}"
+
     
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -49,7 +47,7 @@ jobs:
       run: |
         msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:TargetFramework=net8.0-windows ${{env.SOLUTION_FILE_PATH}}
         echo "[INFO] Zipping build dir..."
-        Compress-Archive -Path /bin/Release/net8.0-windows -DestinationPath ./release-${{env.TAG_NAME}}.zip
+        Compress-Archive -Path bin/Release/net8.0-windows -DestinationPath ./release-${{env.TAG_NAME}}.zip
         echo "[DEBUG] showing github.ref: ${{ github.ref }}"
         echo "[DEBUG] listing current directory:"
         ls
