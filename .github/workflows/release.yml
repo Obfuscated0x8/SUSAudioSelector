@@ -41,10 +41,8 @@ jobs:
         echo "[DEBUG] showing github.ref: ${{ github.ref }}"
         echo "[DEBUG] listing current directory:"
         ls
-        echo "[DEBUG] listing bin/:"
-        ls bin/
-        echo "[DEBUG] listing bin/Release"
-        ls bin/Release
+        echo "[DEBUG] listing bin/Release/net8.0-windows, per TargetFramework in build"
+        ls bin/Release/net8.0-windows/
         echo "[DEBUG] printing current working dir:"
         pwd
         
