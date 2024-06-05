@@ -36,9 +36,11 @@ jobs:
       id: get_tag
       run: |
         echo "[DEBUG] Test pulling out tag name and cutting to be using in zip name"
-        echo "TAG_NAME=${{github.ref}}.split('/')[2]" >> "$GITHUB_ENV"
+        $CUT_TAG = echo "${{ github.ref }}.split('/')[2]"
+        echo "::debug:: CUT_TAG=$CUT_TAG"
+        echo "TAG_NAME=$CUT_TAG" >> "$GITHUB_ENV"
         echo "[DEBUG] Test tag name in env var"
-        echo "[DEBUG] env.TAG_NAME: ${{env.TAG_NAME}}"
+        echo "[DEBUG] env.TAG_NAME: ${{ env.TAG_NAME }}"
     
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
