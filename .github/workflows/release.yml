@@ -42,8 +42,8 @@ jobs:
         pwd
         echo GITHUB_WORKSPACE= ${{env.GITHUB_WORKSPACE}}
         echo listing dir for WORKSPACE
-        ls ${{GITHUB_WORKSPACE}}
-        ls ${{GITHUB_WORKSPACE}}/bin/
+        ls ${{env.GITHUB_WORKSPACE}}
+        ls ${{env.GITHUB_WORKSPACE}}/bin/
         
     - name: release
       uses: softprops/action-gh-release@v2
