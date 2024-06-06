@@ -4,6 +4,7 @@ on:
   push:
     tags:
         - "release-v*"
+        - "test-*"      
 
 permissions:
   contents: read
@@ -19,8 +20,12 @@ env:
 
 jobs:
 
-  build:
+  Release:
     runs-on: windows-latest
+
+    permissions:
+        contents: write
+
     steps:
     - uses: actions/checkout@v4
 
@@ -37,11 +42,12 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: |
         msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:TargetFramework=net8.0-windows ${{env.SOLUTION_FILE_PATH}}
+        Compress-Archive -Path bin/Release/net8.0-windows -DestinationPath ./release-${{github.ref_name}}.zip
         
-
     - name: release
       uses: softprops/action-gh-release@v2
       with:
+        token: ${{github.token}}
         files: |
-          ${{env.GITHUB_WORKSPACE}}\bin\${{env.BUILD_CONFIGURATION}}\release-${{ github.ref }}.zip
+          release-${{github.ref_name}}.zip
   
