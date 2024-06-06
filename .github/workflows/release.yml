@@ -38,11 +38,7 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: |
         msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:TargetFramework=net8.0-windows ${{env.SOLUTION_FILE_PATH}}
-        echo "[DEBUG] Check the REF_NAME: ${{ github.ref_name }}"
-        echo "[INFO] Zipping build dir..."
         Compress-Archive -Path bin/Release/net8.0-windows -DestinationPath ./release-${{github.ref_name}}.zip
-        ls
-        ls bin/release/net8.0-windows
         
     - name: release
       uses: softprops/action-gh-release@v2
