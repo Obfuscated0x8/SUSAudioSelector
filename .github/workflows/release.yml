@@ -22,9 +22,12 @@ jobs:
 
   build:
     runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v4
+    permissions:
+      contents: write
 
+    steps:
+    - uses: actions/checkout@
+  
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
@@ -42,6 +45,7 @@ jobs:
         
     - name: release
       uses: softprops/action-gh-release@v2
+      
       with:
         files: |
           release-${{github.ref_name}}.zip
