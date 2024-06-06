@@ -11,7 +11,7 @@ If you have many versions of the audio (such as covers) you can quickly preview 
 # TODO:
 
 ## Short Term
-- [ ] Clean up the code (seriously its a disaster)
+- [x] Clean up the code (seriously its a disaster)
 - [ ] Add a method to create offsets
 - [ ] Add support for `.ugc` files
 
