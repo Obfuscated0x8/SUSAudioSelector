@@ -32,37 +32,19 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
 
-    - name: Get Current Tag
-      id: get_tag
-      run: |
-        echo "[DEBUG] Test pulling out tag name and cutting to be using in zip name"
-        $CUT_TAG = echo "${{ github.ref }}.split('/')[2]"
-        echo "TAG_NAME=$CUT_TAG" >> "$GITHUB_ENV"
-
-    
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: |
         msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:TargetFramework=net8.0-windows ${{env.SOLUTION_FILE_PATH}}
-        echo "[DEBUG] Check the env var TAG_NAME from the last step: ${{ env.TAG_NAME }}"
+        echo "[DEBUG] Check the REF_NAME: ${{ github.ref_name }}"
         echo "[INFO] Zipping build dir..."
-        Compress-Archive -Path bin/Release/net8.0-windows -DestinationPath ./release-${{env.TAG_NAME}}.zip
-        echo "[DEBUG] showing github.ref: ${{ github.ref }}"
-        echo "[DEBUG] listing current directory:"
-        ls
-        echo "[DEBUG] listing bin/Release/net8.0-windows, per TargetFramework in build"
-        ls bin/Release/net8.0-windows/
-        echo "[DEBUG] printing current working dir:"
-        pwd
-        
-        
-        
+        Compress-Archive -Path bin/Release/net8.0-windows -DestinationPath ./release-${{github.ref_name}}.zip
         
     - name: release
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          release-${{ github.ref }}.zip
+          release-${{github.ref_name}}.zip
   
